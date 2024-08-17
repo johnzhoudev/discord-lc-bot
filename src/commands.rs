@@ -20,6 +20,17 @@ pub async fn help(
     Ok(())
 }
 
+// !post <question url> <story?> - Posts a new question
+#[poise::command(prefix_command, slash_command)]
+pub async fn post(ctx: Context<'_>, #[description = "question url"] url: String) -> Result<(), Error> {
+    let title = "Question Title";
+    let pre_description = format!("Leetcode of the day! {title}: {url}.");
+    let reactions_description = format!("React with :white_check_mark:  if you do it. Also rank personal enjoyment of the problem with :fire:/ :kissing_heart:  or :neutral_face:  or :face_vomiting: or :head_bandage: (messed me up a bit) or :clown: (kinda jokes) or :tropical_drink: (relaxing like ur on vaca). :thought_balloon: (did it in my head)");
+    let response = pre_description + "\n\n" + &reactions_description;
+    ctx.say(response).await?;
+    Ok(())
+}
+
 /// Vote for something
 ///
 /// Enter `~vote pumpkin` to vote for pumpkins
